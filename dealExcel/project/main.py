@@ -35,15 +35,22 @@ if '赔款' in sheet_name or '保费' in sheet_name:
     fist_value = sheet.cell_value(next_row, 0)
     while True:
         old_row = sheet.row(next_row)
+        # 总计前面插入进展因子行
+        if fist_value == '总计' or fist_value == '':
+            new_sheet.row(next_row).write(0, '进展因子')
+            next_row += 1
         for j, item in enumerate(old_row):
             val = item.value
             if str(val):
                 new_sheet.row(next_row).write(j, val)
+        next_row += 1
         if fist_value == '总计' or fist_value == '':
             break
-        next_row += 1
         fist_value = sheet.cell_value(next_row, 0)
-    # 执行列循环并查找最左列
-    max_row = next_row
+    # 有效数据最大行
+    max_row = next_row - 2
+    next_col = site_col
+    while True:
+        old_col = sheet.col(next_col)
 
     new_book.save(r'F:\进展因子\result\赔付率计算源数据.xls')
