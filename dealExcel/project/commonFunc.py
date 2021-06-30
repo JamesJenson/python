@@ -43,5 +43,5 @@ def get_books_tree(file_dir):
             trees.append(file_info)
     return trees
 
-print(get_books_tree(r'E:\进展因子'))
+print(get_books_tree(r'F:\进展因子'))
 
