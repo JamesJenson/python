@@ -44,17 +44,17 @@ import xlrd, xlwt, xlutils
 #
 
 # 创建工作簿
-# wb = xlwt.Workbook()
-# # 创建工作表
-# ws = wb.add_sheet('CNY')
-# # 填充数据
-# ws.write_merge(0, 1, 0, 5, '2019年货币兑换表')
-# data = (('01/01/2019', 4.54646, 1, 0.8888, 0.0672, 6.8885), ('01/01/2019', 4.54646, 1, 0.8888, 0.0672, 6.8885),
-#         ('01/01/2019', 4.54646, 1, 0.8888, 0.0672, 6.8885))
-#
-# for i, item in enumerate(data):  # 获取索引的方法
-#     for j, val in enumerate(item):
-#         ws.write(i + 2, j, val)
+wb = xlwt.Workbook()
+# 创建工作表
+ws = wb.add_sheet('CNY')
+# 填充数据
+ws.write_merge(0, 1, 0, 5, '2019年货币兑换表')
+data = (('01/01/2019', 4.54646, 1, 0.8888, 0.0672, 6.8885), ('01/01/2019', 4.54646, 1, 0.8888, 0.0672, 6.8885),
+        ('01/01/2019', 4.54646, 1, 0.8888, 0.0672, 6.8885))
+
+for i, item in enumerate(data):  # 获取索引的方法
+    for j, val in enumerate(item):
+        ws.write(i + 2, j, val)
 #
 # # 新建sheet也添加图片
 # # wsImage = wb.add_sheet('image')
