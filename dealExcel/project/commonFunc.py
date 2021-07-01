@@ -1,5 +1,7 @@
 import os
 import xlrd
+import string
+
 
 # 检查行数是否存在数据
 def check_row_invalid():
@@ -43,5 +45,26 @@ def get_books_tree(file_dir):
             trees.append(file_info)
     return trees
 
-print(get_books_tree(r'F:\进展因子'))
 
+# 获取指定列的字母标号
+def get_col_name(columnIndex):
+    ret = ''
+    ci = columnIndex - 1
+    index = ci // 26
+    if index > 0:
+        ret += getColumnName(index)
+    ret += string.ascii_uppercase[ci % 26]
+    return ret
+
+
+# 获取进展因子公式
+def get_rate_formula(curName, preName, minRow, maxRow):
+    formula = '''=IF(ISERROR(SUMIFS([A][B]:[A][C],[A][B]:[A][C],"<>")/SUMIFS([D][B]:[D][C],[D][B]:[D][C],"<>")),1,SUMIFS([A][B]:[A][C],[A][B]:[A][C],"<>")/SUMIFS([D][B]:[D][C],[D][B]:[D][C],"<>"))'''
+    formula = formula.replace('[A]', curName).replace('[B]', str(minRow)).replace('[C]', str(maxRow)).replace('[D]', preName)
+    return formula
+
+# 获取计算的值的公式
+def get_muli_formula(curName, preName, rateRow, curRow):
+    formula = '''=[A][B]*[C][D]'''
+    formula = formula.replace('[A]', curName).replace('[B]', str(rateRow)).replace('[C]', preName).replace('[D]', str(curRow))
+    return formula
