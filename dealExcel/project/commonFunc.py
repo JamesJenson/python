@@ -2,22 +2,6 @@ import os
 import xlrd
 import string
 
-
-# 检查行数是否存在数据
-def check_row_invalid():
-    pass
-
-
-# 检查当前sheet页中的存在的非数字类型的字符
-def check_number():
-    pass
-
-
-# 指定行数中某些位置的值及颜色
-def set_val_col():
-    pass
-
-
 # 批量获取book文件路径，没有匹配到对应文件则返回[]
 def batch_get_books(file_dir):
     book_paths = []
@@ -28,9 +12,10 @@ def batch_get_books(file_dir):
         return book_paths
     # 如果路径不存在或者文件不存在则任务当前文件夹找不到(路径错误、不存在的文件)
     for root, dirs, files in os.walk(file_dir):  # 获取所有文件
-        for file in files:  # 遍历所有文件名
-            if os.path.splitext(file)[1] == '.xlsx':
-                book_paths.append(os.path.join(root, file))  # 拼接绝对路径并放入列表
+        if root == file_dir:
+            for file in files:  # 遍历所有文件名
+                if os.path.splitext(file)[1] == '.xlsx':
+                    book_paths.append(os.path.join(root, file))  # 拼接绝对路径并放入列表
     return book_paths
 
 
