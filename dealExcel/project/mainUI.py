@@ -1,4 +1,5 @@
 import commonFunc as Cf
+import main as ma
 from PySide2.QtWidgets import QApplication, QMessageBox, QFileDialog, QFileSystemModel, QTreeWidgetItem, \
     QAbstractItemView
 from PySide2.QtUiTools import QUiLoader
@@ -14,11 +15,14 @@ class MainUI:
 
         self.ui = QUiLoader().load(qfile)
         self.ui.chooseFile.clicked.connect(self.chooseFile)  # 绑定点击方法
+        self.ui.generateFile.clicked.connect(self.generateFile)  # 绑定点击方法
+        self.ui.fileCheck.clicked.connect(self.checkFile)  # 绑定点击方法
         self.model = ''
 
     def chooseFile(self):
         file_path = QFileDialog.getExistingDirectory(self.ui, "", "C:/")  # 起始路径
         self.ui.filePath.setText(file_path)
+        self.ui.treeWidget.clear()
         # 获取对应的文件名称
         trees = Cf.get_books_tree(file_path)
         print(trees)
@@ -30,10 +34,15 @@ class MainUI:
             for j in range(len(trees[i]['fileSheetNames'])):
                 child = QTreeWidgetItem(root)
                 child.setText(0, trees[i]['fileSheetNames'][j])
-                child.setCheckState(0,Qt.Checked)
-            root.setCheckState(0, Qt.Checked)
+                # child.setCheckState(0,Qt.Checked)
+            # root.setCheckState(0, Qt.Checked)
+
+    def generateFile(self):
+        ma.execute(self.ui.filePath.text())
 
 
+    def checkFile(self):
+        ma.checkFile(self.ui.filePath.text())
 
 app = QApplication([])
 status = MainUI()
