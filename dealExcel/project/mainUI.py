@@ -39,10 +39,12 @@ class MainUI:
 
     def generate_file(self):
         ma.execute(self.ui.filePath.text())
+        QMessageBox.about(self.ui, '执行结果', f'''文件计算完成''')
 
 
     def check_file(self):
         ma.checkFile(self.ui.filePath.text())
+        QMessageBox.about(self.ui, '检测结果', f'''功能开发中''')
 
 app = QApplication([])
 status = MainUI()

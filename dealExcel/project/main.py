@@ -104,7 +104,7 @@ def execute(path):
                     cur_name = get_col_name(next_col + 1)
                     pre_name = get_col_name(next_col)
                     formula = get_rate_formula(cur_name, pre_name, min_row + 1, mid_row + 1)
-                    new_sheet.row(rate_row).write(next_col, formula, style.defaultStyle)
+                    new_sheet.row(rate_row).write(next_col, xlwt.Formula(formula), style.defaultStyle)
                     for i in range(site_row + 1, rate_row):
                         if i not in not_empty_rows and i < mid_row:
                             continue
@@ -114,7 +114,7 @@ def execute(path):
                                 new_sheet.row(i).write(next_col, 0, style.zoreStyle)
                             elif i > mid_row:
                                 muli_formula = get_muli_formula(cur_name, pre_name, rate_row + 1, i + 1)
-                                new_sheet.row(i).write(next_col, muli_formula, style.collerStyle)
+                                new_sheet.row(i).write(next_col, xlwt.Formula(muli_formula), style.collerStyle)
                 next_col += 1
         result_path = path + '/result'
         if not os.path.exists(result_path):

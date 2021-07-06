@@ -44,12 +44,12 @@ def get_col_name(columnIndex):
 
 # 获取进展因子公式
 def get_rate_formula(curName, preName, minRow, maxRow):
-    formula = '''=IF(ISERROR(SUMIFS([A][B]:[A][C],[A][B]:[A][C],"<>")/SUMIFS([D][B]:[D][C],[D][B]:[D][C],"<>")),1,SUMIFS([A][B]:[A][C],[A][B]:[A][C],"<>")/SUMIFS([D][B]:[D][C],[D][B]:[D][C],"<>"))'''
+    formula = '''IF(ISERROR(SUMIF([A][B]:[A][C],"<>",[A][B]:[A][C])/SUMIF([D][B]:[D][C],"<>",[D][B]:[D][C])),1,SUMIF([A][B]:[A][C],"<>",[A][B]:[A][C])/SUMIF([D][B]:[D][C],"<>",[D][B]:[D][C]))'''
     formula = formula.replace('[A]', curName).replace('[B]', str(minRow)).replace('[C]', str(maxRow)).replace('[D]', preName)
     return formula
 
 # 获取计算的值的公式
 def get_muli_formula(curName, preName, rateRow, curRow):
-    formula = '''=[A][B]*[C][D]'''
+    formula = '''[A][B]*[C][D]'''
     formula = formula.replace('[A]', curName).replace('[B]', str(rateRow)).replace('[C]', preName).replace('[D]', str(curRow))
     return formula
