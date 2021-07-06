@@ -14,12 +14,12 @@ class MainUI:
         qfile.close()
 
         self.ui = QUiLoader().load(qfile)
-        self.ui.chooseFile.clicked.connect(self.chooseFile)  # 绑定点击方法
-        self.ui.generateFile.clicked.connect(self.generateFile)  # 绑定点击方法
-        self.ui.fileCheck.clicked.connect(self.checkFile)  # 绑定点击方法
+        self.ui.chooseFile.clicked.connect(self.choose_file)  # 绑定点击方法
+        self.ui.generateFile.clicked.connect(self.generate_file)  # 绑定点击方法
+        self.ui.fileCheck.clicked.connect(self.check_file)  # 绑定点击方法
         self.model = ''
 
-    def chooseFile(self):
+    def choose_file(self):
         file_path = QFileDialog.getExistingDirectory(self.ui, "", "C:/")  # 起始路径
         self.ui.filePath.setText(file_path)
         self.ui.treeWidget.clear()
@@ -37,11 +37,11 @@ class MainUI:
                 # child.setCheckState(0,Qt.Checked)
             # root.setCheckState(0, Qt.Checked)
 
-    def generateFile(self):
+    def generate_file(self):
         ma.execute(self.ui.filePath.text())
 
 
-    def checkFile(self):
+    def check_file(self):
         ma.checkFile(self.ui.filePath.text())
 
 app = QApplication([])
